@@ -3,13 +3,15 @@ HOST: http://chester.apiblueprint.org/
 
 # chesster
 
-Chesster is an API for playing chess, both with humans and computers.  
-It also allows for chatting with other users.
+Chesster is an API for playing chess, both with humans and computers.  It also allows for chatting with other users.
 
-## Users [/users]
+## Users [/users/{?handle}]
 
 ### Search for users [GET]
 
++ Parameters
+    + handle (string, optional) - The user handle to search for
+    
 + Response 200 (application/json)
 
         [
@@ -18,8 +20,6 @@ It also allows for chatting with other users.
         ]
 
 ### Create a New User [POST]
-
-Creates a new chess player user.  Defaults to a 1500 chess ranking.
 
 + Request (application/json)
 
@@ -49,3 +49,58 @@ Creates a new chess player user.  Defaults to a 1500 chess ranking.
             {
                 "message": "A user with the email address \"sun@tzu.com\" already exists"
             }
+            
+### View User Profile [GET /users/{user_id}]
+
++ Parameters
+    + user_id (number, required) - A users unique ID
+    
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "handle": "Sun Tzu",
+                "email": "sun@tzu.com"
+                "default_language": "zh-Hant-CN",
+                "time_zone": "UTC-0500",
+                "created_at": "2015-12-14T18:40:51.620Z",
+                "elo_score": "1500"
+            }
+
++ Response 404 (application/json)
+
+    + Body
+            
+            {
+                "message": "That user ID is not valid"
+            }
+            
++ Response 410 (application/json)
+
+    + Body
+    
+            {
+                "message": "That user account has been removed"
+            }
+            
+### Update a user profile [PATCH /users/{user_id}]
+
++ Parameters
+    + user_id (number, required) - A users unique ID
+    
++ Request (application/json)
+
+        {
+            "default_language": "en-GB"    
+        }
+        
++ Response 200
+
++ Response 400 (application/json)
+
+        { "message": "Explanation..." }
+        
+        
+
+    
