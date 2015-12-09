@@ -4,7 +4,7 @@
 
 ## API
 
-Below is the preliminary API.  [Swagger](http://swagger.io) docs will follow.
+Below is the preliminary API.  Expanded API information shall be available in apiary.apib
 
 | Action | Path | Description |
 |--------|------|-------------|
